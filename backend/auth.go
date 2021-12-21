@@ -64,6 +64,6 @@ func login(w http.ResponseWriter, req *http.Request) {
 	data := strings.SplitAfter(content, ",")
 	var username string = data[0]
 	var passwd string = data[1]
-	passwd = passwd[:len(passwd)-1] //notice this is asserted to be a hashed string
+	username = username[:len(username)-1] //notice this is asserted to be a hashed string
 
 }
