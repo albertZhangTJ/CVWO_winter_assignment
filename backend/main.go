@@ -2,7 +2,10 @@ package main
 
 import (
 	"fmt"
+	"sync"
 )
+
+var lck sync.Mutex
 
 func main() {
 	fmt.Println("Starting backend for CVWO winter assignment")
