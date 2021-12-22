@@ -6,6 +6,8 @@ import (
 )
 
 var lck sync.Mutex
+var min_since_start int = 0 //application-wide clock, used for handling timeout etc.
+var logged_users []user
 
 func main() {
 	fmt.Println("Starting backend for CVWO winter assignment")
