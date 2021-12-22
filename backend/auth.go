@@ -63,7 +63,30 @@ func login(w http.ResponseWriter, req *http.Request) {
 
 	data := strings.SplitAfter(content, ",")
 	var username string = data[0]
-	var passwd string = data[1]
-	username = username[:len(username)-1] //notice this is asserted to be a hashed string
+	var passwd string = data[1] //notice this is asserted to be a hashed string
+	username = username[:len(username)-1]
+
+	//TODO: add username format validation for security
+
+	var ori_pw string = execute_sql("SELECT passwd FROM registered_users WHERE username=" + username + ";")
+
+	//If there is no entry matching the provided username, return 403
+	if len(ori_pw) == 0 {
+		w.WriteHeader(http.StatusForbidden)
+		w.Write([]byte("User does not exist"))
+		return
+	}
+
+	hashed_crt_pw_byte := sha256.Sum256([]byte(ori_pw))
+	var hashed_crt_pw string = string(hashed_crt_pw_byte[:])
+	if hashed_crt_pw == passwd {
+		w.WriteHeader(http.StatusOK)
+		var ssid string = generate_session_id(false, username)
+		w.Write([]byte(ssid))
+		return
+	}
+
+	w.WriteHeader(http.StatusForbidden)
+	w.Write([]byte("Invalid credentials"))
 
 }
