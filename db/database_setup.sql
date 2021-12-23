@@ -11,7 +11,7 @@ CREATE TABLE registered_users(
     id int NOT NULL AUTO_INCREMENT, -- user id in system, will not be exposed to user, since we are not expecting a large amount of users, int should provide enough keyspace
     username varchar(256) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
     passwd varchar(256) CHARACTER SET utf8 NOT NULL,
-    profileid int NOT NULL,
+    -- profileid int NOT NULL,
     PRIMARY KEY (id) USING BTREE
 ) ENGINE=InnoDB;
 

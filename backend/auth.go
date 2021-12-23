@@ -124,6 +124,38 @@ func logout(w http.ResponseWriter, req *http.Request) {
 	w.Write([]byte("Session ID not recognized, not logged in or session expired?"))
 }
 
+//This function registers a new user
+//auto-login if successfully registered
+//http request body: "<username>,<password>""
+//http response body: session_id(200) || "Username taken"(403)
+func register(w http.ResponseWriter, req *http.Request) {
+	w.Header().Set("Content-Type", "text/plain; charset=UTF-8")
+
+	buf := new(bytes.Buffer)
+	buf.ReadFrom(req.Body)
+	var content string = buf.String()
+
+	data := strings.SplitAfter(content, ",")
+	var username string = data[0]
+	var passwd string = data[1] //notice this is asserted to be the original string
+	username = username[:len(username)-1]
+
+	var past_user string = execute_sql("SELECT passwd FROM registered_users WHERE username="+username+";", 1, true)
+	if past_user != "" {
+		w.WriteHeader(http.StatusForbidden)
+		w.Write([]byte("Username taken"))
+		return
+	}
+
+	execute_sql("INSERT INTO registered_users ('username', 'passwd') VALUES ('"+username+"','"+passwd+"');", 0, false)
+
+	w.WriteHeader(http.StatusOK)
+	var ssid string = generate_session_id(false, username)
+	w.Write([]byte(ssid))
+	return
+
+}
+
 //This function handles the time-out feature
 func expirer() {
 	for true {
