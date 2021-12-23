@@ -27,5 +27,9 @@ func execute_sql(cmd string, res_col int, is_query bool) string {
 		return ans
 	}
 
-	return ""
+	res, err := db.Exec(cmd)
+	if err != nil {
+		return err.Error()
+	}
+	return "OK"
 }
