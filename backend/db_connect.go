@@ -13,7 +13,7 @@ func execute_sql(cmd string, res_col int, is_query bool) string {
 	db, err := sql.Open("mysql", "CVWO:cvwo_winter_assignment@/cvwo_winter_assignment")
 
 	if is_query {
-		rows, err := db.Query(cmd)
+		rows, _ := db.Query(cmd)
 		var ans string = ""
 		for rows.Next() {
 			var row_content []string
@@ -29,6 +29,7 @@ func execute_sql(cmd string, res_col int, is_query bool) string {
 
 	res, err := db.Exec(cmd)
 	if err != nil {
+		res.LastInsertId() //dummy
 		return err.Error()
 	}
 	return "OK"
