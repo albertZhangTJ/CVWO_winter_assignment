@@ -76,7 +76,7 @@ func login(w http.ResponseWriter, req *http.Request) {
 
 	//TODO: add username format validation for security
 
-	var ori_pw string = execute_sql("SELECT passwd FROM registered_users WHERE username=" + username + ";")
+	var ori_pw string = execute_sql("SELECT passwd FROM registered_users WHERE username="+username+";", 1, true)
 
 	//If there is no entry matching the provided username, return 403
 	if len(ori_pw) == 0 {
