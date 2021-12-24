@@ -11,6 +11,17 @@ var logged_users []user
 
 func main() {
 	fmt.Println("Starting backend for CVWO winter assignment")
+	var wg sync.WaitGroup
+
+	wg.Add(1)
+	go time_flow(&wg)
+
+	wg.Add(1)
+	go expirer(&wg)
+
+	wg.Add(1)
+	go init_listener(&wg, 8080)
+
 	//go printer()
 	for true {
 		if len(events) != 0 {

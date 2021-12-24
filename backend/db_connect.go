@@ -11,6 +11,7 @@ func execute_sql(cmd string, res_col int, is_query bool) string {
 	//In actual engineering setup this should not be hard-coded
 	//But I really don't wanna go through the trouble of having this thing setup in a separate config file
 	db, err := sql.Open("mysql", "CVWO:cvwo_winter_assignment@/cvwo_winter_assignment")
+	defer db.Close()
 
 	if is_query {
 		rows, _ := db.Query(cmd)

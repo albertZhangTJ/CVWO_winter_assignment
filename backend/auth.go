@@ -7,6 +7,7 @@ import (
 	"net/http"
 	"strconv"
 	"strings"
+	"sync"
 	"time"
 )
 
@@ -157,7 +158,7 @@ func register(w http.ResponseWriter, req *http.Request) {
 }
 
 //This function handles the time-out feature
-func expirer() {
+func expirer(wg *sync.WaitGroup) {
 	for true {
 		time.Sleep(time.Second * 60 * 2)
 		lck.Lock()
@@ -169,4 +170,5 @@ func expirer() {
 		}
 		lck.Unlock()
 	}
+	defer wg.Done()
 }
