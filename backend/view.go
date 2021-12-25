@@ -37,5 +37,5 @@ func view_month(w http.ResponseWriter, req *http.Request) {
 		return
 	}
 
-	var db_query string = execute_sql("SELECT * FROM events WHERE username='"+username+"';", 10, true)
+	execute_sql("SELECT * FROM events WHERE username='"+username+"';", 10, true)
 }
