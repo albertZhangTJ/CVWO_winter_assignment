@@ -36,4 +36,6 @@ func view_month(w http.ResponseWriter, req *http.Request) {
 		w.Write([]byte("User appears to be not logged in"))
 		return
 	}
+
+	var db_query string = execute_sql("SELECT * FROM events WHERE username='"+username+"';", 10, true)
 }

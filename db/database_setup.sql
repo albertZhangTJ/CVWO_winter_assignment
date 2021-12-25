@@ -18,7 +18,7 @@ CREATE TABLE registered_users(
 DROP TABLE IF EXISTS events;
 CREATE TABLE events(
     id bigint NOT NULL AUTO_INCREMENT, -- a unique id for each event created, the id will not be recycled since we are using AUTO-INCREMENT, but bigint should still provide enough keyspace
-    profileid int NOT NULL, -- synced with registered_users.profileid, unique for each user
+    username varchar(256) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL, -- synced with registered_users.profileid, unique for each user
     dtstamp varchar(256) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL, -- date and time when the event is created
     dtstart varchar(256) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL, -- date and time when the event starts
     dtend varchar(256) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL, -- date and time when the event ends
