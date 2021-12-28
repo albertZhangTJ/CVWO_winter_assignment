@@ -67,7 +67,7 @@ func view_month(w http.ResponseWriter, req *http.Request) {
 		dtend_yr := string(dtend[0]) + string(dtend[1]) + string(dtend[2]) + string(dtend[3])
 		dtend_mnth := string(dtend[5]) + string(dtend[6])
 		if (dtstart_yr == yr && dtstart_mnth == mnth) || (dtend_yr == yr && dtend_mnth == mnth) {
-			if line[10] != "N" {
+			if line[10] != "Y" {
 				resp = resp + line_to_vevent(line) + "\n"
 			}
 		}
