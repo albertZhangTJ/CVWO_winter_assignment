@@ -59,12 +59,13 @@ func parse_line(inp string) []string {
 func line_to_vevent(line []string) string {
 	var ans string = "BEGIN: VEVENT\n"
 	ans = ans + "UID: " + string(line[0]) + "\n"
+	ans = ans + "SUMMARY: " + string(line[2]) + "\n"
 	ans = ans + "DTSTAMP: " + string(line[3]) + "\n"
 	ans = ans + "ORGANIZER: " + string(line[6]) + "\n"
 	ans = ans + "MAILTO: " + string(line[7]) + "\n"
 	ans = ans + "DTSTART: " + string(line[4]) + "\n"
 	ans = ans + "DTEND: " + string(line[5]) + "\n"
-	ans = ans + "SUMMARY: " + string(line[8]) + "\n"
+	ans = ans + "DESCRIPTION: " + string(line[8]) + "\n"
 	ans = ans + "END: VEVENT\n"
 	return ans
 }
