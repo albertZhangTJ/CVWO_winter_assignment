@@ -24,11 +24,4 @@ func main() {
 
 	wg.Wait()
 
-	//go printer()
-	for true {
-		if len(events) != 0 {
-			fmt.Println(events[0])
-			events = events[1:]
-		}
-	}
 }

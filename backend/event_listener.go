@@ -6,18 +6,6 @@ import (
 	"sync"
 )
 
-var events []string
-
-/*
-func printer() {
-	for i := 0; i < 10; i++ {
-		var resp string = "This is the " + strconv.Itoa(i) + " message"
-		events = append(events, resp)
-		time.Sleep(time.Second)
-	}
-}
-*/
-
 func init_listener(wg *sync.WaitGroup, port int) {
 	http.HandleFunc("/login", login)
 	http.HandleFunc("register", register)
