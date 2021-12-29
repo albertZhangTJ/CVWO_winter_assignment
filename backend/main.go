@@ -22,6 +22,8 @@ func main() {
 	wg.Add(1)
 	go init_listener(&wg, 8080)
 
+	wg.Wait()
+
 	//go printer()
 	for true {
 		if len(events) != 0 {
