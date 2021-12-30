@@ -55,7 +55,7 @@ func view_month(w http.ResponseWriter, req *http.Request) {
 		return
 	}
 
-	var resp string = ""
+	var resp string = "BEGIN:VCALENDAR\nVERSION:2.0\nCALSCALE:GREGORIAN"
 	var qrows []string = parse_to_line(query)
 
 	for i := 0; i < len(qrows); i++ {
@@ -73,6 +73,7 @@ func view_month(w http.ResponseWriter, req *http.Request) {
 		}
 
 	}
+	resp = resp + "END:VCALENDAR"
 	w.WriteHeader(http.StatusOK)
 	w.Write([]byte(resp))
 }
@@ -129,7 +130,7 @@ func view_day(w http.ResponseWriter, req *http.Request) {
 		return
 	}
 
-	var resp string = ""
+	var resp string = "BEGIN:VCALENDAR\nVERSION:2.0\nCALSCALE:GREGORIAN"
 	var qrows []string = parse_to_line(query)
 
 	for i := 0; i < len(qrows); i++ {
@@ -149,6 +150,7 @@ func view_day(w http.ResponseWriter, req *http.Request) {
 		}
 
 	}
+	resp = resp + "END:VCALENDAR"
 	w.WriteHeader(http.StatusOK)
 	w.Write([]byte(resp))
 }

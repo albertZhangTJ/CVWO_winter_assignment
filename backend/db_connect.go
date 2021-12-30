@@ -16,12 +16,32 @@ func execute_sql(cmd string, res_col int, is_query bool) string {
 	if is_query {
 		rows, _ := db.Query(cmd)
 		var ans string = ""
-		for rows.Next() {
-			var row_content []string
-			rows.Scan(&row_content)
+		cols, err := rows.Columns()
+		if err != nil {
+			return ("Failed to get columns" + err.Error())
+		}
 
-			for i := 0; i < len(row_content); i++ {
-				ans = ans + row_content[i] + "|"
+		// Result is your slice string.
+		rawResult := make([][]byte, len(cols))
+
+		dest := make([]interface{}, len(cols)) // A temporary interface{} slice
+		for i, _ := range rawResult {
+			dest[i] = &rawResult[i] // Put pointers to each string in the interface slice
+		}
+
+		for rows.Next() {
+			err = rows.Scan(dest...)
+			if err != nil {
+				return ("Failed to get columns" + err.Error())
+			}
+
+			for i, raw := range rawResult {
+				i++
+				if raw == nil {
+					ans = ans + "NULL" + "|"
+				} else {
+					ans = ans + string(raw) + "|"
+				}
 			}
 			ans = ans + "\n"
 		}
@@ -30,7 +50,7 @@ func execute_sql(cmd string, res_col int, is_query bool) string {
 
 	res, err := db.Exec(cmd)
 	if err != nil {
-		res.LastInsertId() //dummy
+		res = res //dummy
 		return err.Error()
 	}
 	return "OK"
