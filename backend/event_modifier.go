@@ -9,7 +9,7 @@ import (
 //This function is called when a user adds an event
 //http request body: session_id,VCALENDAR
 //http response body: Number of events added
-func add_event(w http.ResponseWriter, req *http.Request) {
+func create_event(w http.ResponseWriter, req *http.Request) {
 	w.Header().Set("Content-Type", "text/plain; charset=UTF-8")
 
 	buf := new(bytes.Buffer)
