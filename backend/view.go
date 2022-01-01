@@ -18,8 +18,8 @@ func view_month(w http.ResponseWriter, req *http.Request) {
 
 	data := strings.SplitAfter(content, ",")
 	var ssid string = data[0]
-	var time string = data[1] //notice this is asserted to be a hashed string
-	time = time[:len(time)-1]
+	var time string = data[1]
+	ssid = ssid[:len(ssid)-1]
 
 	var yr string = ""
 	var mnth string = ""
