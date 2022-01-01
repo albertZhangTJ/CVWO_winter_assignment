@@ -1,6 +1,7 @@
 package main
 
 import (
+	"strings"
 	"sync"
 	"time"
 )
@@ -67,5 +68,44 @@ func line_to_vevent(line []string) string {
 	ans = ans + "DTEND: " + string(line[5]) + "\n"
 	ans = ans + "DESCRIPTION: " + string(line[8]) + "\n"
 	ans = ans + "END: VEVENT\n"
+	return ans
+}
+
+func vcalendar_parser(inp string) [][]string {
+	var ans [][]string
+	var lines []string = parse_to_line(inp)
+	for i := 0; i < len(lines); i++ {
+		if lines[i] == "BEGIN: VEVENT" || lines[i] == "BEGIN:VEVENT" {
+			var line_content [9]string
+			for j := i + 1; j < len(lines); j++ {
+				if strings.ToUpper(lines[j][0:8]) == "SUMMARY:" {
+					line_content[2] = lines[j][8:]
+				}
+				if strings.ToUpper(lines[j][0:8]) == "DTSTAMP:" {
+					line_content[3] = lines[j][8:]
+				}
+				if strings.ToUpper(lines[j][0:8]) == "DTSTART:" {
+					line_content[4] = lines[j][8:]
+				}
+				if strings.ToUpper(lines[j][0:6]) == "DTEND:" {
+					line_content[5] = lines[j][6:]
+				}
+				if strings.ToUpper(lines[j][0:10]) == "ORGANIZER:" {
+					line_content[6] = lines[j][10:]
+				}
+				if strings.ToUpper(lines[j][0:7]) == "MAILTO:" {
+					line_content[7] = lines[j][7:]
+				}
+				if strings.ToUpper(lines[j][0:12]) == "DESCRIPTION:" {
+					line_content[8] = lines[j][12:]
+				}
+				if lines[j] == "END: VEVENT" || lines[j] == "END:VEVENT" {
+					ans = append(ans, line_content[:])
+					i = j
+					break
+				}
+			}
+		}
+	}
 	return ans
 }
