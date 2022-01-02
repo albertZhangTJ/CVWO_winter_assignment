@@ -77,11 +77,11 @@ func vcalendar_parser(inp string) [][]string {
 	var ans [][]string
 	var lines []string = parse_to_line(inp)
 	for i := 0; i < len(lines); i++ {
-		fmt.Println("vcalendar_parser: line " + strconv.Itoa(i) + "  " + lines[i])
+		fmt.Println("vcalendar_parser: i line " + strconv.Itoa(i) + "  " + lines[i])
 		if lines[i] == "BEGIN: VEVENT" || lines[i] == "BEGIN:VEVENT" {
 			var line_content [9]string
 			for j := i + 1; j < len(lines); j++ {
-				fmt.Println("vcalendar_parser: line " + strconv.Itoa(j) + "  " + lines[j])
+				fmt.Println("vcalendar_parser: j line " + strconv.Itoa(j) + "  " + lines[j])
 				if strings.ToUpper(lines[j][0:8]) == "SUMMARY:" {
 					line_content[2] = lines[j][8:]
 				}
