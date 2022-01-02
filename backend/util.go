@@ -84,25 +84,25 @@ func vcalendar_parser(inp string) [][]string {
 			var line_content [9]string
 			for j := i + 1; j < len(lines); j++ {
 				fmt.Println("vcalendar_parser: j line " + strconv.Itoa(j) + "  " + lines[j])
-				if strings.ToUpper(lines[j][0:8]) == "SUMMARY:" {
+				if len(lines[j]) > 8 && strings.ToUpper(lines[j][0:8]) == "SUMMARY:" {
 					line_content[2] = lines[j][8:]
 				}
-				if strings.ToUpper(lines[j][0:8]) == "DTSTAMP:" {
+				if len(lines[j]) > 8 && strings.ToUpper(lines[j][0:8]) == "DTSTAMP:" {
 					line_content[3] = lines[j][8:]
 				}
-				if strings.ToUpper(lines[j][0:8]) == "DTSTART:" {
+				if len(lines[j]) > 8 && strings.ToUpper(lines[j][0:8]) == "DTSTART:" {
 					line_content[4] = lines[j][8:]
 				}
-				if strings.ToUpper(lines[j][0:6]) == "DTEND:" {
+				if len(lines[j]) > 6 && strings.ToUpper(lines[j][0:6]) == "DTEND:" {
 					line_content[5] = lines[j][6:]
 				}
-				if strings.ToUpper(lines[j][0:10]) == "ORGANIZER:" {
+				if len(lines[j]) > 10 && strings.ToUpper(lines[j][0:10]) == "ORGANIZER:" {
 					line_content[6] = lines[j][10:]
 				}
-				if strings.ToUpper(lines[j][0:7]) == "MAILTO:" {
+				if len(lines[j]) > 7 && strings.ToUpper(lines[j][0:7]) == "MAILTO:" {
 					line_content[7] = lines[j][7:]
 				}
-				if strings.ToUpper(lines[j][0:12]) == "DESCRIPTION:" {
+				if len(lines[j]) > 12 && strings.ToUpper(lines[j][0:12]) == "DESCRIPTION:" {
 					line_content[8] = lines[j][12:]
 				}
 				if lines[j] == "END: VEVENT" || lines[j] == "END:VEVENT" {
