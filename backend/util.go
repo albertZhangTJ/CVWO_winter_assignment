@@ -26,6 +26,7 @@ func time_flow(wg *sync.WaitGroup) {
 }
 
 func parse_to_line(inp string) []string {
+	fmt.Println("parse to line: " + inp)
 	var ans []string
 	var temp string = ""
 	for i := 0; i < len(inp); i++ {
