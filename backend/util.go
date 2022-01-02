@@ -115,3 +115,20 @@ func vcalendar_parser(inp string) [][]string {
 	}
 	return ans
 }
+
+func split_after_first_comma(inp string) []string {
+	var ans []string
+	var splited bool = false
+	var temp string = ""
+	for i := 0; i < len(inp); i++ {
+		if !splited && inp[i] == ',' {
+			ans[0] = temp
+			temp = ""
+			splited = true
+		} else {
+			temp = temp + string(inp[i])
+		}
+	}
+	ans[1] = temp
+	return ans
+}

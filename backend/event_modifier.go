@@ -5,7 +5,6 @@ import (
 	"fmt"
 	"net/http"
 	"strconv"
-	"strings"
 )
 
 //This function is called when a user adds an event
@@ -18,11 +17,10 @@ func create_event(w http.ResponseWriter, req *http.Request) {
 	buf.ReadFrom(req.Body)
 	var content string = buf.String()
 
-	data := strings.SplitAfter(content, ",")
+	data := split_after_first_comma(content)
 
 	var ssid string = data[0]
 	var payload string = data[1]
-	ssid = ssid[:len(ssid)-1]
 
 	var username string = ""
 	lck.Lock()
