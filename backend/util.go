@@ -122,13 +122,13 @@ func split_after_first_comma(inp string) []string {
 	var temp string = ""
 	for i := 0; i < len(inp); i++ {
 		if !splited && inp[i] == ',' {
-			ans[0] = temp
+			ans = append(ans, temp)
 			temp = ""
 			splited = true
 		} else {
 			temp = temp + string(inp[i])
 		}
 	}
-	ans[1] = temp
+	ans = append(ans, temp)
 	return ans
 }
