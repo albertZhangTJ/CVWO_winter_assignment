@@ -13,6 +13,7 @@ func init_listener(wg *sync.WaitGroup, port int) {
 	http.HandleFunc("/view_month", view_month)
 	http.HandleFunc("/view_day", view_day)
 	http.HandleFunc("/create_event", create_event)
+	http.HandleFunc("/delete_event", delete_event)
 
 	http.ListenAndServe(":"+strconv.Itoa(port), nil)
 	defer wg.Done()
