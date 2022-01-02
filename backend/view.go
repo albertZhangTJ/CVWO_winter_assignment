@@ -62,8 +62,8 @@ func view_month(w http.ResponseWriter, req *http.Request) {
 
 	for i := 0; i < len(qrows); i++ {
 		var line []string = parse_line(qrows[i])
-		var dtstart string = line[3]
-		var dtend string = line[4]
+		var dtstart string = line[4]
+		var dtend string = line[5]
 		dtstart_yr := string(dtstart[0]) + string(dtstart[1]) + string(dtstart[2]) + string(dtstart[3])
 		dtstart_mnth := string(dtstart[5]) + string(dtstart[6])
 		dtend_yr := string(dtend[0]) + string(dtend[1]) + string(dtend[2]) + string(dtend[3])
