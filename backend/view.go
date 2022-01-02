@@ -57,7 +57,7 @@ func view_month(w http.ResponseWriter, req *http.Request) {
 		return
 	}
 
-	var resp string = "BEGIN:VCALENDAR\nVERSION:2.0\nCALSCALE:GREGORIAN"
+	var resp string = "BEGIN:VCALENDAR\nVERSION:2.0\nCALSCALE:GREGORIAN\n"
 	var qrows []string = parse_to_line(query)
 
 	for i := 0; i < len(qrows); i++ {
@@ -93,7 +93,7 @@ func view_day(w http.ResponseWriter, req *http.Request) {
 	data := strings.SplitAfter(content, ",")
 	var ssid string = data[0]
 	var time string = data[1] //notice this is asserted to be a hashed string
-	time = time[:len(time)-1]
+	ssid = ssid[:len(ssid)-1]
 
 	var yr string = ""
 	var mnth string = ""
@@ -137,8 +137,8 @@ func view_day(w http.ResponseWriter, req *http.Request) {
 
 	for i := 0; i < len(qrows); i++ {
 		var line []string = parse_line(qrows[i])
-		var dtstart string = line[3]
-		var dtend string = line[4]
+		var dtstart string = line[4]
+		var dtend string = line[5]
 		dtstart_yr := string(dtstart[0]) + string(dtstart[1]) + string(dtstart[2]) + string(dtstart[3])
 		dtstart_mnth := string(dtstart[5]) + string(dtstart[6])
 		dtstart_dt := string(dtstart[7]) + string(dtstart[8])
