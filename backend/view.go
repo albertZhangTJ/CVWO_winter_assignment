@@ -2,6 +2,7 @@ package main
 
 import (
 	"bytes"
+	"fmt"
 	"net/http"
 	"strings"
 )
@@ -42,6 +43,7 @@ func view_month(w http.ResponseWriter, req *http.Request) {
 	}
 	lck.Unlock()
 
+	fmt.Println("view month: " + username + "  ssid: " + ssid)
 	if username == "" {
 		w.WriteHeader(http.StatusForbidden)
 		w.Write([]byte("User appears to be not logged in"))
