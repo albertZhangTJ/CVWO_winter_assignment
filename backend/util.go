@@ -76,6 +76,7 @@ func line_to_vevent(line []string) string {
 func vcalendar_parser(inp string) [][]string {
 	var ans [][]string
 	var lines []string = parse_to_line(inp)
+	fmt.Println("vcalendar_parser lines length: " + strconv.Itoa(len(lines)))
 	for i := 0; i < len(lines); i++ {
 		fmt.Println("vcalendar_parser: i line " + strconv.Itoa(i) + "  " + lines[i])
 		if lines[i] == "BEGIN: VEVENT" || lines[i] == "BEGIN:VEVENT" {
