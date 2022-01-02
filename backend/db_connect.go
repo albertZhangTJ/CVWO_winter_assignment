@@ -2,6 +2,7 @@ package main
 
 import (
 	"database/sql"
+	"fmt"
 
 	_ "github.com/go-sql-driver/mysql"
 )
@@ -51,6 +52,7 @@ func execute_sql(cmd string, res_col int, is_query bool) string {
 	res, err := db.Exec(cmd)
 	if err != nil {
 		res = res //dummy
+		fmt.Println("db connect err(modify): " + err.Error())
 		return err.Error()
 	}
 	return "OK"
