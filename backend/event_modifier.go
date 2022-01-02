@@ -82,7 +82,7 @@ func delete_event(w http.ResponseWriter, req *http.Request) {
 
 	var parsed_payload [][]string = vcalendar_parser(payload)
 	for i := 0; i < len(parsed_payload); i++ {
-		execute_sql("UPDATE events SET isdeleted='Y' WHERE username='"+username+"',eventname='"+parsed_payload[i][2]+"', dtstart='"+parsed_payload[i][4]+"',dtend='"+parsed_payload[i][5]+"';", 0, false)
+		execute_sql("UPDATE events SET isdeleted='Y' WHERE username='"+username+"' AND eventname='"+parsed_payload[i][2]+"' AND dtstart='"+parsed_payload[i][4]+"' AND dtend='"+parsed_payload[i][5]+"';", 0, false)
 	}
 	w.WriteHeader(http.StatusOK)
 	w.Write([]byte(strconv.Itoa(len(parsed_payload)) + " events deleted"))
