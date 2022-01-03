@@ -30,7 +30,7 @@ func generate_session_id(is_guest bool, username string) string {
 	if is_guest {
 		ans_byte := sha256.Sum256([]byte(time.Now().String() + strconv.Itoa(rand.Intn(100))))
 		ans := hex.EncodeToString(ans_byte[:])
-		var to_append user = user{session_id: ans, is_guest: true, username: "", data: "", time_last_action: min_since_start}
+		var to_append user = user{session_id: ans, is_guest: true, username: "guest", data: "", time_last_action: min_since_start}
 		lck.Lock()
 		logged_users = append(logged_users, to_append)
 		lck.Unlock()
