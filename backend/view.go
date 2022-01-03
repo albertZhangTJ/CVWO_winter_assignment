@@ -34,10 +34,12 @@ func view_month(w http.ResponseWriter, req *http.Request) {
 	}
 
 	var username string = ""
+	var query string = ""
 	lck.Lock()
 	for i := 0; i < len(logged_users); i++ {
 		if logged_users[i].session_id == ssid {
 			username = logged_users[i].username
+			query = logged_users[i].data
 			break
 		}
 	}
@@ -50,7 +52,9 @@ func view_month(w http.ResponseWriter, req *http.Request) {
 		return
 	}
 
-	var query string = execute_sql("SELECT * FROM events WHERE username='"+username+"';", 10, true)
+	if username != "guest" {
+		query = execute_sql("SELECT * FROM events WHERE username='"+username+"';", 10, true)
+	}
 
 	if len(query) == 0 {
 		w.WriteHeader(http.StatusOK)
@@ -110,10 +114,12 @@ func view_day(w http.ResponseWriter, req *http.Request) {
 	}
 
 	var username string = ""
+	var query string = ""
 	lck.Lock()
 	for i := 0; i < len(logged_users); i++ {
 		if logged_users[i].session_id == ssid {
 			username = logged_users[i].username
+			query = logged_users[i].data
 			break
 		}
 	}
@@ -125,7 +131,9 @@ func view_day(w http.ResponseWriter, req *http.Request) {
 		return
 	}
 
-	var query string = execute_sql("SELECT * FROM events WHERE username='"+username+"';", 10, true)
+	if username != "guest" {
+		query = execute_sql("SELECT * FROM events WHERE username='"+username+"';", 10, true)
+	}
 
 	if len(query) == 0 {
 		w.WriteHeader(http.StatusOK)

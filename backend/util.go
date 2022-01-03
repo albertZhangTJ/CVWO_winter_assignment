@@ -132,3 +132,14 @@ func split_after_first_comma(inp string) []string {
 	ans = append(ans, temp)
 	return ans
 }
+
+func parsed_vcalendar_to_string(parsed [][]string) string {
+	var ans string = ""
+	for i := 0; i < len(parsed); i++ {
+		for j := 0; j < len(parsed[i]); j++ {
+			ans = ans + parsed[i][j] + "|"
+		}
+		ans = ans + "\n"
+	}
+	return ans
+}

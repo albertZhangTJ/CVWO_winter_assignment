@@ -23,10 +23,17 @@ func create_event(w http.ResponseWriter, req *http.Request) {
 	var payload string = data[1]
 
 	var username string = ""
+	var parsed_payload [][]string = vcalendar_parser(payload)
 	lck.Lock()
 	for i := 0; i < len(logged_users); i++ {
 		if logged_users[i].session_id == ssid {
 			username = logged_users[i].username
+			if username == "guest" {
+				logged_users[i].data = logged_users[i].data + "\n" + parsed_vcalendar_to_string(parsed_payload)
+				w.WriteHeader(http.StatusOK)
+				w.Write([]byte(strconv.Itoa(len(parsed_payload)) + " events added"))
+				return
+			}
 			break
 		}
 	}
@@ -38,7 +45,6 @@ func create_event(w http.ResponseWriter, req *http.Request) {
 		return
 	}
 
-	var parsed_payload [][]string = vcalendar_parser(payload)
 	fmt.Println("create event: " + strconv.Itoa(len(parsed_payload)))
 	for i := 0; i < len(parsed_payload); i++ {
 		execute_sql("INSERT INTO events (username, eventname, dtstamp, dtstart, dtend, organizer, mailto, memo) VALUES ('"+username+"','"+parsed_payload[i][2]+"','"+parsed_payload[i][3]+"','"+parsed_payload[i][4]+"','"+parsed_payload[i][5]+"','"+parsed_payload[i][6]+"','"+parsed_payload[i][7]+"','"+parsed_payload[i][8]+"');", 0, false)
