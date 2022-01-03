@@ -122,6 +122,7 @@ func split_after_first_comma(inp string) []string {
 	var temp string = ""
 	for i := 0; i < len(inp); i++ {
 		if !splited && inp[i] == ',' {
+			fmt.Print("split after first comma: " + temp)
 			ans = append(ans, temp)
 			temp = ""
 			splited = true
@@ -129,6 +130,7 @@ func split_after_first_comma(inp string) []string {
 			temp = temp + string(inp[i])
 		}
 	}
+	fmt.Println("," + temp)
 	ans = append(ans, temp)
 	return ans
 }
