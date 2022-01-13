@@ -1,0 +1,67 @@
+\documentclass{article}[12pt]
+\fontfamily{georgia}
+
+\usepackage{geometry}
+\usepackage{graphicx}
+\usepackage{amsmath}
+
+\title{Basic features and usage of the task planning app}
+\author{Albert ZHANG Tongjun}
+
+\begin{document}
+\maketitle
+\tableofcontents
+~\\~\\
+
+
+\section{Use Cases}
+The application can be used as either a guest or a registered user.
+The \textbf{data created by a guest} will be processed but \textbf{NOT STORED} by the server and \textbf{WILL BE LOST} once the session is closed or expired.
+However, a guest can choose to download their planned events onto their own device (in .ics format, .pdf format might be supported in later versions).
+Users can also import their events using from files (.ics format only).
+~\\~\\
+At the current stage, registration will not require verification of any mobile number or emails.
+Since the registration process does not require contact verification, the password cannot be recovered once forgotten. The user can set a prompt message to remind him/herself of the password.
+~\\~\\
+The application will have the several following modes.
+~\\
+
+\subsection{Calendar Mode}
+In this mode, the application will behave like a normal online calendar.
+It will display one month per page.
+~\\~\\
+Users can create events and add them to their calendar.
+Events can be set to ``parallelable'' or ``non-parallelable''.
+When an ``non-parallelable'' event clashes with another event, a warning will be generated.
+~\\
+
+\subsection{Day-Planner Mode}
+In this mode, the application will show the events in a specific day.
+It will also list out any interval between two events.
+~\\~\\
+A section will be provided to list out all of the events on that day so that the user can use it as a to-do list.
+~\\
+
+\subsection{To-Do List Mode}
+A list of all the events since the current time will be provided for use as a to-do list.
+~\\
+
+
+
+\section{Backend}
+The backend will be implemented using Go.
+It will receive http requests send by the client and make response accordingly.
+~\\~\\
+The application will be designed to be deployed on a Linux server (Ubuntu 20.04 LTS).
+A cloud server with fixed IP will be used for deployment during testing.
+
+
+
+\section{Others}
+The network traffic will not be protected with TLS.
+Thus, the validation credentials during login will be processed with hash values instead of orginal text.
+~\\~\\
+The frontend will be designed primarily for use on computers (landscape screens).
+There will be a light mode and a dark mode, with light mode being the default option.
+\end{document}
+
