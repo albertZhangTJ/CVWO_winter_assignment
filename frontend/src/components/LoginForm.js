@@ -39,7 +39,7 @@ class LoginForm extends React.Component {
             timeout: 1000,
             headers: {'Content-Type': 'text/plain'},
             body: this.state.profile.username+','+this.state.profile.password
-          });
+        });
         const response= axios.text();
         if (response==="Invalid credentials"){
             alert("Username or password is incorrect");
@@ -48,8 +48,7 @@ class LoginForm extends React.Component {
             alert("User is not registered")
         }
         else {
-            const cookie = new Cookies();
-            cookie.set('ssid', response);
+            localStorage.setItem('ssid', response);
             window.location.href("/view_month")
         }
 

@@ -6,7 +6,7 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { createTheme, ThemeProvider } from '@material-ui/core';
 import { blue, orange } from '@material-ui/core/colors';
 import Register from './pages/Register';
-import View_month from './View_month';
+import View_month from './pages/View_month';
 
 const theme = createTheme({
     palette: {
