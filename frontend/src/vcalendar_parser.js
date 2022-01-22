@@ -1,7 +1,7 @@
-function parse_vcal(str){
+export function parse_vcal(str){
     var ans=[];
     var raw=str.split("\n");
-    for (var i=0; i<length(raw); i++){
+    for (var i=0; i<raw.lnegth; i++){
         if (raw[i]=="BEGIN:VEVENT" || raw[i]=="BEGIN: VEVENT"){
             var to_add={
                 UID: "",
@@ -13,8 +13,8 @@ function parse_vcal(str){
                 DTEND: "",
                 DESCRIPTION: ""
             };
-            for (var j=i+1; j<length(raw); j++){
-                if (length(raw[j])>8 && raw[j].toUpperCase().substring(0,8)=="SUMMARY:"){
+            for (var j=i+1; j<raw.length; j++){
+                if (raw[j].length>8 && raw[j].toUpperCase().substring(0,8)=="SUMMARY:"){
                     if (raw[j][8]==' '){
                         to_add.SUMMARY=raw[j].substring(9);
                     }
@@ -22,7 +22,7 @@ function parse_vcal(str){
                         to_add.SUMMARY=raw[j].substring(8);
                     }
                 }
-                else if (length(raw[j])>8 && raw[j].toUpperCase().substring(0,8)=="DTSTAMP:"){
+                else if (raw[j].length>8 && raw[j].toUpperCase().substring(0,8)=="DTSTAMP:"){
                     if (raw[j][8]==' '){
                         to_add.DTSTAMP=raw[j].substring(9);
                     }
@@ -30,7 +30,7 @@ function parse_vcal(str){
                         to_add.DTSTAMP=raw[j].substring(8);
                     }
                 }
-                else if (length(raw[j])>8 && raw[j].toUpperCase().substring(0,8)=="DTSTART:"){
+                else if (raw[j].length>8 && raw[j].toUpperCase().substring(0,8)=="DTSTART:"){
                     if (raw[j][8]==' '){
                         to_add.DTSTART=raw[j].substring(9);
                     }
@@ -38,7 +38,7 @@ function parse_vcal(str){
                         to_add.DTSTART=raw[j].substring(8);
                     }
                 }
-                else if (length(raw[j])>6 && raw[j].toUpperCase().substring(0,6)=="DTEND:"){
+                else if (raw[j].length>6 && raw[j].toUpperCase().substring(0,6)=="DTEND:"){
                     if (raw[j][6]==' '){
                         to_add.DTEND=raw[j].substring(7);
                     }
@@ -46,7 +46,7 @@ function parse_vcal(str){
                         to_add.DTEND=raw[j].substring(6);
                     }
                 }
-                else if (length(raw[j])>10 && raw[j].toUpperCase().substring(0,10)=="DESCRIPTION:"){
+                else if (raw[j].length>10 && raw[j].toUpperCase().substring(0,10)=="DESCRIPTION:"){
                     if (raw[j][10]==' '){
                         to_add.DESCRIPION=raw[j].substring(11);
                     }
@@ -54,7 +54,7 @@ function parse_vcal(str){
                         to_add.DESCRIPTION=raw[j].substring(10);
                     }
                 }
-                else if (length(raw[j])>7 && raw[j].toUpperCase().substring(0,7)=="MAILTO:"){
+                else if (raw[j].length>7 && raw[j].toUpperCase().substring(0,7)=="MAILTO:"){
                     if (raw[j][7]==' '){
                         to_add.MAILTO=raw[j].substring(8);
                     }
@@ -62,7 +62,7 @@ function parse_vcal(str){
                         to_add.MAILTO=raw[j].substring(7);
                     }
                 }
-                else if (length(raw[j])>10 && raw[j].toUpperCase().substring(0,10)=="ORGANIZER:"){
+                else if (raw[j].length>10 && raw[j].toUpperCase().substring(0,10)=="ORGANIZER:"){
                     if (raw[j][10]==' '){
                         to_add.ORGANIZER=raw[j].substring(11);
                     }
@@ -70,7 +70,7 @@ function parse_vcal(str){
                         to_add.ORGANIZER=raw[j].substring(10);
                     }
                 }
-                else if (length(raw[j])>4 && raw[j].toUpperCase().substring(0,4)=="UID:"){
+                else if (raw[j].length>4 && raw[j].toUpperCase().substring(0,4)=="UID:"){
                     if (raw[j][4]==' '){
                         to_add.MAILTO=raw[j].substring(5);
                     }
@@ -91,9 +91,9 @@ function parse_vcal(str){
     return ans;
 }
 
-function generate_vcal(data){
+export function generate_vcal(data){
     var ans="BEGIN: VCALENDAR\n";
-    for (var i=0; i<length(data); i++){
+    for (var i=0; i<data.length; i++){
         var event=data[i];
         ans=ans+"BEGIN:VEVENT";
         ans=ans+"UID:"+event.UID+"\n";

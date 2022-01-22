@@ -52,10 +52,12 @@ func generate_session_id(is_guest bool, username string) string {
 //http response body: session_id || error message(status 403)
 func login(w http.ResponseWriter, req *http.Request) {
 	w.Header().Set("Content-Type", "text/plain; charset=UTF-8")
+	w.Header().Set("Access-Control-Allow-Origin", "*")
 
 	buf := new(bytes.Buffer)
 	buf.ReadFrom(req.Body)
 	var content string = buf.String()
+	fmt.Println("login: " + content)
 
 	//since any request with length 3 is not possibly valid, return immediately with 403
 	if len(content) < 3 {

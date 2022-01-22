@@ -12,11 +12,12 @@ import (
 //http response body: A series of VEVENT objects (as defined in ics format), separated by empty lines
 func view_month(w http.ResponseWriter, req *http.Request) {
 	w.Header().Set("Content-Type", "text/plain; charset=UTF-8")
+	w.Header().Set("Access-Control-Allow-Origin", "*")
 
 	buf := new(bytes.Buffer)
 	buf.ReadFrom(req.Body)
 	var content string = buf.String()
-
+	fmt.Println(content)
 	data := strings.SplitAfter(content, ",")
 	var ssid string = data[0]
 	var time string = data[1]

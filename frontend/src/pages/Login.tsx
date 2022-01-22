@@ -9,10 +9,18 @@ const Login: React.FC = () => {
     const [isShowButton, setIsShowButton] = useState(false);
 
     const guest_login = () => {
-        axios.post('http://localhost:8080/login', { body: 'guest' }, {headers:{'Content-Type': 'text/plain'}})
+        axios.post('http://localhost:8080/login', 'guest', {headers:{'Content-Type': 'text/plain'}})
             .then(function(response) {
-                console.log(response.data);
-                window.location.href = "/View_month"
+                if (response.data==="Invalid credentials"){
+                    alert("Username or password is incorrect");
+                }
+                else if (response.data==="User does not exist"){
+                    alert("User is not registered")
+                }
+                else {
+                    localStorage.setItem('ssid', response.data);
+                    window.location.href="/view_month";
+                }
             })
             .catch(function(error) {
                 console.log(error);

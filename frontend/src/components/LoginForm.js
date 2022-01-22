@@ -33,26 +33,23 @@ class LoginForm extends React.Component {
     }
 
     onSubmit = (e) => {
-        e.preventDefault();
-        const instance = axios.create({
-            baseURL: 'https://localhost:8080/login',
-            timeout: 1000,
-            headers: {'Content-Type': 'text/plain'},
-            body: this.state.profile.username+','+this.state.profile.password
-        });
-        const response= axios.text();
-        if (response==="Invalid credentials"){
-            alert("Username or password is incorrect");
-        }
-        else if (response==="User does not exist"){
-            alert("User is not registered")
-        }
-        else {
-            localStorage.setItem('ssid', response);
-            window.location.href("/view_month")
-        }
+        axios.post('http://localhost:8080/login', this.state.profile.username+","+this.state.profile.password, {headers:{'Content-Type': 'text/plain'}})
+            .then(function(response) {
+                if (response.data==="Invalid credentials"){
+                    alert("Username or password is incorrect");
+                }
+                else if (response.data==="User does not exist"){
+                    alert("User is not registered")
+                }
+                else {
+                    localStorage.setItem('ssid', response.data);
+                    window.location.href="/view_month";
+                }
+            })
+            .catch(function(error) {
+            });
+    };
 
-    }
 
     render() {
       return (
