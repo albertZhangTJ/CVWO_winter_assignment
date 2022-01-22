@@ -2,6 +2,7 @@ import React, { ChangeEvent, useState } from 'react';
 import Typewriter from 'typewriter-effect';
 import { Button } from '@material-ui/core';
 import { Link } from 'react-router-dom';
+import axios from "axios";
 
 class RegisterForm extends React.Component {
    constructor(props) {
@@ -30,8 +31,22 @@ class RegisterForm extends React.Component {
     }
 
     onSubmit = (event) => {
-        event.preventDefault();
-        alert(JSON.stringify(this.state.profile));
+        axios.post('http://localhost:8080/register', this.state.username+","+this.state.password, {headers:{'Content-Type': 'text/plain'}})
+            .then(function(response) {
+                if (response.data==="Invalid credentials"){
+                    alert("Username or password is incorrect");
+                }
+                else if (response.data==="User does not exist"){
+                    alert("User is not registered")
+                }
+                else {
+                    localStorage.setItem('ssid', response.data);
+                    window.location.href="/view_month";
+                }
+            })
+            .catch(function(error) {
+                console.log(error);
+            });
     }
 
     render() {

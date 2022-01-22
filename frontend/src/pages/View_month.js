@@ -100,7 +100,7 @@ class View_month extends React.Component {
     }
 
     onSubmit = (e) => {
-      axios.post('http://localhost:8080/view_month', this.state.profile.year+this.state.profile.month, {headers:{'Content-Type': 'text/plain'}})
+      axios.post('http://localhost:8080/view_month', localStorage.getItem("ssid")+","+this.state.profile.year+this.state.profile.month, {headers:{'Content-Type': 'text/plain'}})
           .then(function(response) {
               this.data=response.data;
               this.parsed_data=parse_vcal(response.data)
@@ -109,7 +109,7 @@ class View_month extends React.Component {
           });
     };
 
-    render() :JSX.Element {
+    render() {
         return   (<>
         <h3>Search for month</h3>
         <form onSubmit={(e) => this.onSubmit(e)}>
@@ -152,7 +152,11 @@ class View_month extends React.Component {
             </table> 
         </Styles>
         <br/><br/>
-        <button onClick={window.location.href="/view_day"}>
+        <button onClick={()=>window.location.href="/view_day"}>
+          Create an event
+        </button>
+        <br/><br/>
+        <button onClick={()=>window.location.href="/view_day"}>
           View by day
         </button>
         </>);
