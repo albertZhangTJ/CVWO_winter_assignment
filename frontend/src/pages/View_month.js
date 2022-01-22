@@ -152,13 +152,13 @@ class View_month extends React.Component {
             </table> 
         </Styles>
         <br/><br/>
-        <button onClick={()=>window.location.href="/view_day"}>
+        <Button onClick={()=>window.location.href="/view_day"}>
           Create an event
-        </button>
+        </Button>
         <br/><br/>
-        <button onClick={()=>window.location.href="/view_day"}>
+        <Button onClick={()=>window.location.href="/view_day"}>
           View by day
-        </button>
+        </Button>
         </>);
     }
 }

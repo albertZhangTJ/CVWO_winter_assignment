@@ -1,5 +1,4 @@
 import Login from './pages/Login';
-import StyledPage from './pages/StyledPage';
 import React from 'react';
 import './App.css';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';

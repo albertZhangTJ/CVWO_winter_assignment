@@ -33,11 +33,8 @@ class RegisterForm extends React.Component {
     onSubmit = (event) => {
         axios.post('http://localhost:8080/register', this.state.username+","+this.state.password, {headers:{'Content-Type': 'text/plain'}})
             .then(function(response) {
-                if (response.data==="Invalid credentials"){
-                    alert("Username or password is incorrect");
-                }
-                else if (response.data==="User does not exist"){
-                    alert("User is not registered")
+                if (response.data==="Username taken"){
+                    alert("Username has already been user, please choose another one");
                 }
                 else {
                     localStorage.setItem('ssid', response.data);

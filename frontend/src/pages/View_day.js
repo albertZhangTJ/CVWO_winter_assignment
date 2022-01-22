@@ -170,13 +170,13 @@ class View_day extends React.Component {
             </table> 
         </Styles>
         <br/><br/>
-        <button onClick={()=>window.location.href="/create_event"}>
+        <Button onClick={()=>window.location.href="/create_event"}>
           Create an event
-        </button>
+        </Button>
         <br/><br/>
-        <button onClick={()=>window.location.href="/view_month"}>
+        <Button onClick={()=>window.location.href="/view_month"}>
           View by month
-        </button>
+        </Button>
         </>);
     }
 }
