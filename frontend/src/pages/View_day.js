@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 import ReactTable from "react-table";
 import styled from 'styled-components'
-import {parse_vcal} from "../vcalendar_parser.js"
+import {parse_vcal, add_null} from "../vcalendar_parser.js"
 //import 'react-calendar/dist/Calendar.css';
 
 const Styles = styled.table`
@@ -100,7 +100,7 @@ class View_day extends React.Component {
     handleMonthChange(e){
       this.setState( (state, props) => {
           let profile = state.profile;
-          profile.month = e.target.value;
+          profile.month = add_null(e.target.value);
           return {profile: profile}
       });
     }
@@ -108,10 +108,10 @@ class View_day extends React.Component {
     handleDayChange(e){
         this.setState( (state, props) => {
             let profile = state.profile;
-            profile.day = e.target.value;
+            profile.day = add_null(e.target.value);
             return {profile: profile}
         });
-      }
+    }
 
     onSubmit = (e) => {
       axios.post('http://localhost:8080/view_day', localStorage.getItem("ssid")+","+this.state.profile.year+this.state.profile.month+this.state.profile.day, {headers:{'Content-Type': 'text/plain'}})

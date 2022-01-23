@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 import ReactTable from "react-table";
 import styled from 'styled-components'
-import {parse_vcal} from "../vcalendar_parser.js"
+import {parse_vcal, add_null} from "../vcalendar_parser.js"
 //import 'react-calendar/dist/Calendar.css';
 
 const Styles = styled.table`
@@ -94,7 +94,7 @@ class View_month extends React.Component {
     handleMonthChange(e){
       this.setState( (state, props) => {
           let profile = state.profile;
-          profile.month = e.target.value;
+          profile.month = add_null(e.target.value);
           return {profile: profile}
       });
     }

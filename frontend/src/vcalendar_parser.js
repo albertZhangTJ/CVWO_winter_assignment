@@ -1,3 +1,5 @@
+import { MonthView } from "react-calendar";
+
 export function parse_vcal(str){
     var ans=[];
     var raw=str.split("\n");
@@ -96,7 +98,6 @@ export function generate_vcal(data){
     for (var i=0; i<data.length; i++){
         var event=data[i];
         ans=ans+"BEGIN:VEVENT";
-        ans=ans+"UID:"+event.UID+"\n";
         ans=ans+"SUMMARY:"+event.SUMMARY+"\n";
         ans=ans+"DTSTAMP:"+event.DTSTAMP+"\n";
         ans=ans+"DTSTART:"+event.DTSTART+"\n";
@@ -109,4 +110,38 @@ export function generate_vcal(data){
     ans=ans+"END:VCALENDAR\n";
     return ans;
     
+}
+
+export function add_null(ori){
+    if (ori.length()==2){
+        return ori;
+    }
+    if (ori.length()==1){
+        return "0"+ori;
+    }
+    return "00";
+}
+
+export function set_year(ori, ne){
+    return add_null(ne)+ori.substring(4);
+}
+
+export function set_month(ori,ne){
+    return ori.substring(0,5)+add_null(ne)+ori.substring(7);
+}
+
+export function set_day(ori,ne){
+    return ori.substring(0,8)+add_null(ne)+ori.substring(10);
+}
+
+export function set_hour(ori,ne){
+    return ori.substring(0,11)+add_null(ne)+ori.substring(13);
+}
+
+export function set_minute(ori,ne){
+    return ori.substring(0,14)+add_null(ne)+ori.substring(16);
+}
+
+export function set_second(ori,ne){
+    return ori.substring(0,17)+add_null(ne)+ori.substring(19);
 }
