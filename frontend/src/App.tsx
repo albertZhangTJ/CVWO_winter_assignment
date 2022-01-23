@@ -7,6 +7,7 @@ import { blue, orange } from '@material-ui/core/colors';
 import Register from './pages/Register';
 import View_month from './pages/View_month';
 import View_day from './pages/View_day';
+import Create_event from './pages/Create_event';
 
 const theme = createTheme({
     palette: {
@@ -25,6 +26,7 @@ const App: React.FC = () => {
                         <Route path="/view_month" element={<View_month />} />
                         <Route path="/view_day" element={<View_day />} />
                         <Route path="/" element={<Login />} />
+                        <Route path="/create_event" element={<Create_event />} />
                     </Routes>
                 </BrowserRouter>
             </ThemeProvider>

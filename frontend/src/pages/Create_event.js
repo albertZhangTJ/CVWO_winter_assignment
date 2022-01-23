@@ -1,10 +1,9 @@
 import LoginForm from '../components/LoginForm';
 import React, { useState } from 'react';
-import { parse_vcal, generate_vcal, add_null, set_year, set_month, set_date, set_hour, set_minute, set_second } from '../vcalendar_parser';
+import { parse_vcal, generate_vcal, add_null, set_year, set_month, set_day, set_hour, set_minute, set_second } from '../vcalendar_parser';
 import { Button } from '@material-ui/core';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
-import { profile } from 'console';
 
 class Create_event extends React.Component{
     constructor(props) {
@@ -12,9 +11,9 @@ class Create_event extends React.Component{
         this.state = {
             profile: {}
         }
-        profile.DTSTART="0000-00-00T00:00:00Z";
-        profile.DTEND="0000-00-00T00:00:00Z";
-        profile.DTSTAMP=new Date().toISOString();
+        this.state.profile.DTSTART="0000-00-00T00:00:00Z";
+        this.state.profile.DTEND="0000-00-00T00:00:00Z";
+        this.state.profile.DTSTAMP=new Date().toISOString();
         this.handleSummaryChange=this.handleSummaryChange.bind(this);
         this.handleDtstartYearChange=this.handleDtstartYearChange.bind(this);
         this.handleDtstartMonthChange=this.handleDtstartMonthChange.bind(this);    
@@ -188,30 +187,87 @@ class Create_event extends React.Component{
                   value={this.state.profile.SUMMARY}
                   onChange={this.handleSummaryChange} />
               
-                  <br/><br/>
+                  <br/><br/><br/>
   
                   <h3>Start time</h3>
 
                   <label for="syear"> Year </label>
                   <input type="text" id="syear" name="Year"
                   onChange={this.handleDtstartYearChange} />
-
+                  &nbsp;
                   <label for="smonth"> Month </label>
                   <input type="text" id="smonth" name="Month"
                   onChange={this.handleDtstartMonthChange} />
-
+                  &nbsp;
                   <label for="sday"> Day </label>
                   <input type="text" id="sday" name="Day"
                   onChange={this.handleDtstartDayChange} />
-
-                  <br/>
+                  <br/><br/>
 
                   <label for="shour"> Hour </label>
                   <input type="text" id="shour" name="Hour"
                   onChange={this.handleDtstartHourChange} />
+                  &nbsp;
+                  <label for="sminute"> Minute </label>
+                  <input type="text" id="sminute" name="Minute"
+                  onChange={this.handleDtstartMinuteChange} />
+                  &nbsp;
+                  <label for="ssecond"> Second </label>
+                  <input type="text" id="ssecond" name="Second"
+                  onChange={this.handleDtstartSecondChange} />
   
+                  <br/><br/><br/>
+
+                  <h3>End time</h3>
+
+                  <label for="eyear"> Year </label>
+                  <input type="text" id="eyear" name="Year"
+                  onChange={this.handleDtendYearChange} />
+                  &nbsp;
+                  <label for="emonth"> Month </label>
+                  <input type="text" id="emonth" name="Month"
+                  onChange={this.handleDtendMonthChange} />
+                  &nbsp;
+                  <label for="eday"> Day </label>
+                  <input type="text" id="eday" name="Day"
+                  onChange={this.handleDtendDayChange} />
+
                   <br/><br/>
-  
+
+                  <label for="ehour"> Hour </label>
+                  <input type="text" id="ehour" name="Hour"
+                  onChange={this.handleDtendHourChange} />
+                  &nbsp;
+                  <label for="eminute"> Minute </label>
+                  <input type="text" id="eminute" name="Minute"
+                  onChange={this.handleDtendMinuteChange} />
+                  &nbsp;
+                  <label for="esecond"> Second </label>
+                  <input type="text" id="esecond" name="Second"
+                  onChange={this.handleDtendSecondChange} />
+
+                  <br/><br/><br/>
+
+                  <h3>Memo</h3>
+                  <label for="memo"> Memo </label>
+                  <input type="text" id="memo" name="Memo"
+                  onChange={this.handleDescriptionChange} />
+
+                  <br/><br/><br/>
+
+                  <h3>Organizer</h3>
+                  <label for="org"> Organizer </label>
+                  <input type="text" id="org" name="Organizer"
+                  onChange={this.handleOrganizerChange} />
+
+                  <br/><br/><br/>
+
+                  <h3>Contact</h3>
+                  <label for="mail"> E-mail </label>
+                  <input type="text" id="mail" name="email"
+                  onChange={this.handleMailtoChange} />
+                  
+                  <br/><br/><br/>
                   <input type="submit" value="Submit" />
               </form>
               </div>
