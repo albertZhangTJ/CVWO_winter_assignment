@@ -1,0 +1,49 @@
+\documentclass{article}[12pt]
+\fontfamily{georgia}
+
+\usepackage{geometry}
+\usepackage{graphicx}
+\usepackage{amsmath}
+
+\title{CVWO winter assignment Final Writeup}
+\author{Albert ZHANG Tongjun}
+
+\begin{document}
+\maketitle
+\tableofcontents
+~\\~\\
+This is the final writeup for the CVWO winter assignment.
+~\\~\\
+In this project, I have built a frontend backend separated project (also my first fullstack project).
+The project has three major components: frontend, backend, and database.
+The frontend is built with React+Javascript+Typescript. 
+The backend is built with golang.
+the database is built with mysql.
+
+\section{Manual}
+When accessing the website, the user can choose to login with their account, continue as a guest, or register a new account.
+~\\~\\
+After logging in, the website will display every event related to that account in the current month.
+The user can specify a month he/she wants to look at by input the month into the form on the top of the page.
+~\\~\\
+The user can also focus on one specific day by clicking the ``View by day'' button near the bottom of the page.
+~\\~\\
+The user can create an event on either the View by day page or the View by month page.
+
+
+
+\section{Highlights}
+\begin{itemize}
+    \item Authentication, both as guests and as registered users
+    \item Http requests in ICS format, able to support direct ics file upload with some modification to the frontend
+\end{itemize}
+
+\section{Further steps to take}
+\begin{itemize}
+    \item Add css styling to the project
+    \item Add dark mode
+    \item Change the view month component to a standard calendar view
+    \item Add TLS
+\end{itemize}
+
+\end{document}
