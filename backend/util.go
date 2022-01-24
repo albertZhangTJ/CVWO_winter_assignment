@@ -145,3 +145,12 @@ func parsed_vcalendar_to_string(parsed [][]string) string {
 	}
 	return ans
 }
+
+func contains_only_valid(inp string) bool {
+	for i := 0; i < len(inp); i++ {
+		if !(inp[i] > 'a' && inp[i] < 'z') && !(inp[i] > 'A' && inp[i] < 'Z') && !(inp[i] > '0' && inp[i] < '9') {
+			return false
+		}
+	}
+	return true
+}

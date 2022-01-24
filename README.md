@@ -1,8 +1,10 @@
 # CVWO_winter_assignment
 
-This is the CVWO winter assignment.
+This is the CVWO winter assignment for ZHANG TONGJUN (A0245152M).
 
-Detailed write-up and documentation will be provided after the project has been completed.
+Since I had no prior experience with frontend developing before this project, the frontend part is based on the provided CVWO smaple react app. I have also relied heavily on StackOverflow during the construction of the frontend of this project.
+
+The project was somewhat different from described in the previously uploaded description file.
 
 ## Licenses
 

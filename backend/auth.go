@@ -80,7 +80,12 @@ func login(w http.ResponseWriter, req *http.Request) {
 	var passwd string = data[1] //notice this is asserted to be a hashed string
 	username = username[:len(username)-1]
 	fmt.Println("login:" + username + "&" + passwd)
-	//TODO: add username format validation for security
+
+	if !contains_only_valid(passwd) || !contains_only_valid(username) {
+		w.WriteHeader(http.StatusForbidden)
+		w.Write([]byte("Invalid username or password"))
+		return
+	}
 
 	var ori_pw string = execute_sql("SELECT passwd FROM registered_users WHERE username='"+username+"';", 1, true)
 	ori_pw = ori_pw[:len(ori_pw)-2]
@@ -147,6 +152,12 @@ func register(w http.ResponseWriter, req *http.Request) {
 	var username string = data[0]
 	var passwd string = data[1] //notice this is asserted to be the original string
 	username = username[:len(username)-1]
+
+	if !contains_only_valid(passwd) || !contains_only_valid(username) {
+		w.WriteHeader(http.StatusForbidden)
+		w.Write([]byte("Invalid username or password"))
+		return
+	}
 
 	var past_user string = execute_sql("SELECT passwd FROM registered_users WHERE username='"+username+"';", 1, true)
 	fmt.Println("Register: past user query executed")
