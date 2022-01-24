@@ -19,6 +19,25 @@ backend:
 cd backend && go build
 ````
 
+## Deployment
+
+On Ubuntu:
+
+Load database into mysql:
+````
+sudo service start mysql
+mysql -u username -p db_name < db/database_setup.sql
+````
+
+Start backend:
+````
+./backend/backend
+````
+
+Start frontend:
+````
+cd frontend && yarn start
+````
 
 
 ## Licenses
